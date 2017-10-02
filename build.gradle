@@ -12,7 +12,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.gradle.publish:plugin-publish-plugin:0.9.7"
+        classpath "com.gradle.publish:plugin-publish-plugin:0.9.8"
         classpath( "com.netflix.nebula:gradle-git-scm-plugin:3.0.1")
     }
 }
@@ -84,7 +84,7 @@ task('tagVersion', description: 'Tag the repository with the current version.', 
     scmFactory.create().tag(version)
 }
 
-task('release', description: 'Release the project and publish to public repo.', group: 'release', dependsOn: [publish, tagVersion, publishPlugins])
+task('release', description: 'Release the project and publish to public repo.', group: 'release', dependsOn: [test, publish, tagVersion, publishPlugins])
 
 task unversionedJar(type: Jar, dependsOn: 'jar') {
     version = null
