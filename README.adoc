@@ -80,7 +80,6 @@ jaxb {
 === JAXB Plugin Convention
 
 These are the configurable parameters for the JAXB Plugin.
-If the **Default** is **none**, then the paramenter is **NOT** optional and a value must be provided.
 
 .JAXB Plugin Parameters
 [cols="2,6,3,2"]
@@ -92,7 +91,7 @@ If the **Default** is **none**, then the paramenter is **NOT** optional and a va
 
 | `xsdDir`
 | Defined **by each** project to tell the plugin where to find the `.xsd` files to parse.
-| **none**
+| `${project.projectDir}/src/main/resources/schema`
 | `String`
 
 | `xsdIncludes`
@@ -103,14 +102,14 @@ If the **Default** is **none**, then the paramenter is **NOT** optional and a va
 | `episodesDir`
 | **All** generated episode files go directly under here, no subfolders.
   (i.e. _"build/generated-resources/episodes"_, _"episodes"_, _"schema/episodes"_, _"xsd/episodes"_, _"XMLSchema/episodes"_)
-| **none**
+| `${project.buildDir}/generated-resources/episodes`
 | `String`
 
 | `bindingsDir`
 | User defined binding files to pass into the `xjc` task.
   **All** files are directly under this folder, _no subfolders_.
   (i.e. _"src/main/resources/schema"_, _"bindings"_, _"schema/bindings"_, _"xsd/bindings"_, _"XMLSchema/bindings"_)
-| **none**
+| `${project.projectDir}/src/main/resources/schema`
 | `String`
 
 | `bindings`
@@ -122,7 +121,6 @@ If the **Default** is **none**, then the paramenter is **NOT** optional and a va
 === XJC Convention
 
 These are the configurable parameters for the JAXB Plugin's XJC interactions.
-If the **Default** is **none**, then the paramenter is **NOT** optional and a value must be provided.
 
 .XJC Plugin Parameters
 [cols="2,6,3,2"]
@@ -175,7 +173,7 @@ If the **Default** is **none**, then the paramenter is **NOT** optional and a va
 
 |`generatePackage`
 | specify a package to generate to
-| **none**
+| **Not Defined**
 | `String`
 
 |`args`
@@ -198,14 +196,7 @@ https://jaxb.java.net/2.2.7/docs/ch04.html#tools-xjc-ant-task[XJC Ant Task docum
 
 === Default Example using JAXB
 
-If the default conventions aren't changed, the only thing to configure _(per project)_ is the `xsdDir`, and jaxb dependencies as described above.
-
-[source, groovy]
-----
-jaxb {
-  xsdDir = "${project.projectDir}/schema/folder1"
-}
-----
+If the default conventions are used, then there is nothing to configure.
 
 === Default Example using JAXB2
 
