@@ -36,9 +36,8 @@ Any version of jaxb that you care to use will work.
 [source, groovy]
 ----
 dependencies {
-  jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.7-b41'
-  jaxb 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
-  jaxb 'javax.xml.bind:jaxb-api:2.2.7'
+  jaxb 'org.glassfish.jaxb:jaxb-xjc:2.2.11'
+  jaxb 'org.glassfish.jaxb:jaxb-runtime:2.2.11'
   xjc  'com.example:xjc-plugin:0.0.0'
 }
 ----
@@ -242,9 +241,8 @@ subprojects { project ->
     apply plugin: 'org.openrepose.gradle.plugins.jaxb'
 
     dependencies { 
-      jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.7-b41'
-      jaxb 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
-      jaxb 'javax.xml.bind:jaxb-api:2.2.7'
+      jaxb 'org.glassfish.jaxb:jaxb-xjc:2.2.11'
+      jaxb 'org.glassfish.jaxb:jaxb-runtime:2.2.11'
     }
   }
 }
@@ -262,9 +260,8 @@ subprojects { project ->
     apply plugin: 'com.github.jacobono.jaxb'
 
     dependencies { 
-      jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.7-b41'
-      jaxb 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
-      jaxb 'javax.xml.bind:jaxb-api:2.2.7'
+      jaxb 'org.glassfish.jaxb:jaxb-xjc:2.2.11'
+      jaxb 'org.glassfish.jaxb:jaxb-runtime:2.2.11'
     }
   }
 }

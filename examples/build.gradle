@@ -37,10 +37,8 @@ subprojects { project ->
         apply plugin: 'org.openrepose.gradle.plugins.jaxb'
 
         dependencies {
-            // TODO: jaxws 2.2.6 uses jaxb 2.2.5, but can't dL 2.2.5 from maven the pom is off
-            jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.7-b41'
-            jaxb 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
-            jaxb 'javax.xml.bind:jaxb-api:2.2.7'
+            jaxb 'org.glassfish.jaxb:jaxb-xjc:2.2.11'
+            jaxb 'org.glassfish.jaxb:jaxb-runtime:2.2.11'
         }
 
         def generatedDir = "${project.buildDir}/generated-sources/xjc"
