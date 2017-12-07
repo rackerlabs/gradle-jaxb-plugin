@@ -162,8 +162,8 @@ These are the configurable parameters for the JAXB Plugin's XJC interactions.
 | `boolean`
 
 |`removeOldOutput`
-| Only used with nested `<produces>` elements, when _'yes'_ all files are deleted before XJC is run
-| _'yes'_
+| Only used with nested `<produces>` elements, when `yes` all files are deleted before XJC is run
+| `yes`
 | `String`
 
 |`header`
@@ -200,7 +200,7 @@ If the default conventions are used, then there is nothing to configure.
 
 === Default Example using JAXB2
 
-Customized to use the same `xjc` task that http://mojo.codehaus.org/jaxb2-maven-plugin/xjc-mojo.html[xjc-mojo] uses.
+Customized to use `xjc` plugins.
 
 [source, groovy]
 ----
@@ -249,7 +249,7 @@ You can then use it this way:
 ----
 subprojects { project ->
   if(Boolean.valueOf(project.getProperties().getOrDefault('doJAXB', 'false'))) { 
-    apply plugin: 'com.github.jacobono.jaxb'
+    apply plugin: 'org.openrepose.gradle.plugins.jaxb'
 
     dependencies { 
       jaxb 'org.glassfish.jaxb:jaxb-xjc:2.2.11'
