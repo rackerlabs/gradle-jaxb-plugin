@@ -291,6 +291,7 @@ This will run the xjc task on `common` before running the xjc task of of the pro
 == Examples
 
 You can find some small example projects using this plugin in the link:./examples[examples folder].
+Simply issue `../gradlew clean build` from within it to run them all.
 
 For a basic example of using this plugin with multiple sub-projects that have interactions, please see this https://github.com/wdschei/gradle-jaxb-plugin-test[test project].
 
