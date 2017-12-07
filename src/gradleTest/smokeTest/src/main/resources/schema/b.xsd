@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://test.com/xsd/B"
+           targetNamespace="http://test.com/xsd/B">
+
+    <xs:element name="testB" type="TestB"/>
+
+    <xs:complexType name="TestB">
+        <xs:all>
+            <xs:element name="testElement" type="xs:string" minOccurs="1" maxOccurs="1"/>
+        </xs:all>
+        <xs:attribute name="testAttribute" type="xs:string" default="defaultAttribute" use="optional"/>
+    </xs:complexType>
+</xs:schema>

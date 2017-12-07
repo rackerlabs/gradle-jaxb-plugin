@@ -13,6 +13,7 @@ buildscript {
     dependencies {
         classpath 'com.gradle.publish:plugin-publish-plugin:0.9.9'
         classpath 'com.netflix.nebula:gradle-git-scm-plugin:3.0.1'
+        classpath 'gradle.plugin.org.ysb33r.gradle:gradletest:1.1'
     }
 }
 
@@ -20,6 +21,7 @@ apply plugin: 'com.gradle.plugin-publish'
 apply plugin: 'groovy'
 apply plugin: 'maven-publish'
 apply plugin: 'nebula.gradle-git-scm'
+apply plugin: 'org.ysb33r.gradletest'
 
 repositories {
     jcenter()
@@ -35,11 +37,16 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.6'
     compile 'com.google.inject:guice:3.0'
     compile 'com.google.inject.extensions:guice-assistedinject:3.0'
+
     //testCompile 'org.spockframework:spock-core:0.7-groovy-1.8' // v1.12
     //testCompile 'org.spockframework:spock-core:1.0-groovy-2.3' // v2.0 - v2.7
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'   // v2.8 - v2.10
     testCompile 'cglib:cglib-nodep:2.2'
     testCompile 'org.objenesis:objenesis:1.2'
+
+    gradleTest 'org.glassfish.jaxb:jaxb-xjc:2.2.11'
+    gradleTest 'org.glassfish.jaxb:jaxb-runtime:2.2.11'
+
 }
 
 // NOTE:    The gradle.publish.key and gradle.publish.secret need added to your ~/.gradle/gradle.properties as per the
@@ -105,4 +112,26 @@ task uninstallPlugin(type: Delete) {
     group = 'installation'
     description = 'Removes the plugin from your gradle distribution.'
     delete("/${gradleInstallDir}/lib/plugins/${unversionedJar.archiveName}")
+}
+
+task copyJarfile(type: Copy) {
+    dependsOn jar
+    from(jar)
+    into("${project.buildDir}/gradleTest/repo/")
+}
+
+tasks.withType(Groovydoc).all { enabled = false }
+
+gradleTest {
+    dependsOn copyJarfile
+
+    versions '2.0', '2.1', '2.2', '2.3', '2.4', '2.5', '2.6', '2.7', '2.8', '2.9'
+    versions '2.10', '2.11', '2.12', '2.13', '2.14.1'
+    versions '3.0', '3.1', '3.2.1', '3.3', '3.4.1', '3.5.1'
+    versions '4.0', '4.1', '4.2', '4.3.1'
+    versions '4.4'
+
+    beforeTest {
+        println "  ${it.name}"
+    }
 }

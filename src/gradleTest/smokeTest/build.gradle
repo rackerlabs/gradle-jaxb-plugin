@@ -1,0 +1,16 @@
+repositories {
+    jcenter()
+}
+
+apply plugin: 'org.openrepose.gradle.plugins.jaxb'
+
+dependencies {
+    jaxb 'org.glassfish.jaxb:jaxb-xjc:2.2.11'
+    jaxb 'org.glassfish.jaxb:jaxb-runtime:2.2.11'
+}
+
+apply plugin: 'java'
+
+tasks.withType(JavaCompile) { dependsOn('xjc') }
+
+task runGradleTest { dependsOn build }
