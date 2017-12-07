@@ -214,9 +214,10 @@ Customized to use the same `xjc` task that http://mojo.codehaus.org/jaxb2-maven-
 [source, groovy]
 ----
 dependencies {
-  jaxb "org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.6.5"
-  jaxb "org.jvnet.jaxb2_commons:jaxb2-basics:0.6.4"
-  jaxb "org.jvnet.jaxb2_commons:jaxb2-basics-annotate:0.6.4"
+    jaxb "org.jvnet.jaxb2_commons:jaxb2-basics:1.11.1"
+    jaxb 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:1.11.1'
+    jaxb 'org.jvnet.jaxb2_commons:jaxb2-basics-annotate:1.0.4'
+    jaxb 'org.slf4j:slf4j-log4j12:1.7.25'
 }
 
 jaxb {
