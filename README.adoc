@@ -36,9 +36,8 @@ Any version of jaxb that you care to use will work.
 [source, groovy]
 ----
 dependencies {
-  jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.7-b41'
-  jaxb 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
-  jaxb 'javax.xml.bind:jaxb-api:2.2.7'
+  jaxb 'org.glassfish.jaxb:jaxb-xjc:2.2.11'
+  jaxb 'org.glassfish.jaxb:jaxb-runtime:2.2.11'
   xjc  'com.example:xjc-plugin:0.0.0'
 }
 ----
@@ -81,7 +80,6 @@ jaxb {
 === JAXB Plugin Convention
 
 These are the configurable parameters for the JAXB Plugin.
-If the **Default** is **none**, then the paramenter is **NOT** optional and a value must be provided.
 
 .JAXB Plugin Parameters
 [cols="2,6,3,2"]
@@ -93,7 +91,7 @@ If the **Default** is **none**, then the paramenter is **NOT** optional and a va
 
 | `xsdDir`
 | Defined **by each** project to tell the plugin where to find the `.xsd` files to parse.
-| **none**
+| `${project.projectDir}/src/main/resources/schema`
 | `String`
 
 | `xsdIncludes`
@@ -104,14 +102,14 @@ If the **Default** is **none**, then the paramenter is **NOT** optional and a va
 | `episodesDir`
 | **All** generated episode files go directly under here, no subfolders.
   (i.e. _"build/generated-resources/episodes"_, _"episodes"_, _"schema/episodes"_, _"xsd/episodes"_, _"XMLSchema/episodes"_)
-| **none**
+| `${project.buildDir}/generated-resources/episodes`
 | `String`
 
 | `bindingsDir`
 | User defined binding files to pass into the `xjc` task.
   **All** files are directly under this folder, _no subfolders_.
   (i.e. _"src/main/resources/schema"_, _"bindings"_, _"schema/bindings"_, _"xsd/bindings"_, _"XMLSchema/bindings"_)
-| **none**
+| `${project.projectDir}/src/main/resources/schema`
 | `String`
 
 | `bindings`
@@ -123,7 +121,6 @@ If the **Default** is **none**, then the paramenter is **NOT** optional and a va
 === XJC Convention
 
 These are the configurable parameters for the JAXB Plugin's XJC interactions.
-If the **Default** is **none**, then the paramenter is **NOT** optional and a value must be provided.
 
 .XJC Plugin Parameters
 [cols="2,6,3,2"]
@@ -165,8 +162,8 @@ If the **Default** is **none**, then the paramenter is **NOT** optional and a va
 | `boolean`
 
 |`removeOldOutput`
-| Only used with nested `<produces>` elements, when _'yes'_ all files are deleted before XJC is run
-| _'yes'_
+| Only used with nested `<produces>` elements, when `yes` all files are deleted before XJC is run
+| `yes`
 | `String`
 
 |`header`
@@ -176,7 +173,7 @@ If the **Default** is **none**, then the paramenter is **NOT** optional and a va
 
 |`generatePackage`
 | specify a package to generate to
-| **none**
+| **Not Defined**
 | `String`
 
 |`args`
@@ -199,25 +196,19 @@ https://jaxb.java.net/2.2.7/docs/ch04.html#tools-xjc-ant-task[XJC Ant Task docum
 
 === Default Example using JAXB
 
-If the default conventions aren't changed, the only thing to configure _(per project)_ is the `xsdDir`, and jaxb dependencies as described above.
-
-[source, groovy]
-----
-jaxb {
-  xsdDir = "${project.projectDir}/schema/folder1"
-}
-----
+If the default conventions are used, then there is nothing to configure.
 
 === Default Example using JAXB2
 
-Customized to use the same `xjc` task that http://mojo.codehaus.org/jaxb2-maven-plugin/xjc-mojo.html[xjc-mojo] uses.
+Customized to use `xjc` plugins.
 
 [source, groovy]
 ----
 dependencies {
-  jaxb "org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.6.5"
-  jaxb "org.jvnet.jaxb2_commons:jaxb2-basics:0.6.4"
-  jaxb "org.jvnet.jaxb2_commons:jaxb2-basics-annotate:0.6.4"
+    jaxb "org.jvnet.jaxb2_commons:jaxb2-basics:1.11.1"
+    jaxb 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:1.11.1'
+    jaxb 'org.jvnet.jaxb2_commons:jaxb2-basics-annotate:1.0.4'
+    jaxb 'org.slf4j:slf4j-log4j12:1.7.25'
 }
 
 jaxb {
@@ -242,9 +233,8 @@ subprojects { project ->
     apply plugin: 'org.openrepose.gradle.plugins.jaxb'
 
     dependencies { 
-      jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.7-b41'
-      jaxb 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
-      jaxb 'javax.xml.bind:jaxb-api:2.2.7'
+      jaxb 'org.glassfish.jaxb:jaxb-xjc:2.2.11'
+      jaxb 'org.glassfish.jaxb:jaxb-runtime:2.2.11'
     }
   }
 }
@@ -259,12 +249,11 @@ You can then use it this way:
 ----
 subprojects { project ->
   if(Boolean.valueOf(project.getProperties().getOrDefault('doJAXB', 'false'))) { 
-    apply plugin: 'com.github.jacobono.jaxb'
+    apply plugin: 'org.openrepose.gradle.plugins.jaxb'
 
     dependencies { 
-      jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.7-b41'
-      jaxb 'com.sun.xml.bind:jaxb-impl:2.2.7-b41'
-      jaxb 'javax.xml.bind:jaxb-api:2.2.7'
+      jaxb 'org.glassfish.jaxb:jaxb-xjc:2.2.11'
+      jaxb 'org.glassfish.jaxb:jaxb-runtime:2.2.11'
     }
   }
 }

@@ -5,11 +5,10 @@ description = "Gradle plugin to ease development with XSD's using the jaxb ant t
 
 buildscript {
     repositories {
+        jcenter()
         maven {
             url "https://plugins.gradle.org/m2/"
         }
-        mavenCentral()
-        jcenter()
     }
     dependencies {
         classpath "com.gradle.publish:plugin-publish-plugin:0.9.8"
@@ -24,7 +23,6 @@ apply plugin: 'nebula.gradle-git-scm'
 
 repositories {
     jcenter()
-    mavenCentral()
 }
 
 sourceCompatibility = 1.8
