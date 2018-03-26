@@ -48,7 +48,7 @@ class XsdDependencyTreeFactory {
    */
   public TreeManager createDependencyTree(List<XsdNamespace> namespaces,
                                           List<BaseSchemaDocument> documents) {
-    log.lifecycle("jaxb: generating xsd namespace dependency tree")
+    log.info("jaxb: generating xsd namespace dependency tree")
     treeManager.createTreeRoot(namespaces.findAll { it.hasDependencies == false })
     def haveDependencies = namespaces.findAll { it.hasDependencies == true }
     def namespaceDependencies = resolveDependentNamespaces(haveDependencies,
