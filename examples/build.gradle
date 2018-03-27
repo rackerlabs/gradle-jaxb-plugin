@@ -2,7 +2,7 @@ buildscript {
     repositories {
         jcenter()
         maven {
-            url "https://plugins.gradle.org/m2/"
+            url 'https://plugins.gradle.org/m2/'
         }
     }
 
@@ -49,6 +49,8 @@ subprojects { project ->
         }
 
         apply plugin: 'scala'
+
+        tasks.withType(ScalaCompile) { dependsOn('xjc') }
 
         dependencies {
             // 54.4. Dependency management

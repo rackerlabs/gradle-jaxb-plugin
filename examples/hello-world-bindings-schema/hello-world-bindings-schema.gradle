@@ -7,11 +7,11 @@ dependencies {
 }
 
 jaxb {
-  xsdDir = "${project.rootDir}/schema/multiple"
-  bindingsDir = "${project.rootDir}/schema/multiple/xjb"
-  episodesDir = "${project.buildDir}/generated-resources/schema/episodes"
-  xjc {
-    taskClassname = 'org.jvnet.jaxb2_commons.xjc.XJC2Task'
-    args = ['-Xannotate']
-  }
+    xsdDir = "${project.rootDir}/schema/multiple"
+    bindingsDir = "${project.rootDir}/schema/multiple/xjb"
+    episodesDir = "${project.buildDir}/generated-resources/schema/episodes"
+    xjc {
+        taskClassname = 'org.jvnet.jaxb2_commons.xjc.XJC2Task'
+        args = ['-Xannotate']
+    }
 }
