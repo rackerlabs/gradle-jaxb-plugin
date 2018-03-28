@@ -2,6 +2,7 @@ package org.openrepose.gradle.plugins.jaxb.task
 
 import org.gradle.api.logging.Logging
 import org.gradle.api.logging.Logger
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.file.FileCollection
@@ -17,7 +18,16 @@ import org.openrepose.gradle.plugins.jaxb.schema.factory.DocumentFactory
 class JaxbDependencyTree extends DefaultTask { 
   
   static final Logger log = Logging.getLogger(JaxbDependencyTree.class)
-  
+
+  /**
+   * Directory where the generated java files from xjc would go
+   * Usually {@code <project-root>/build/generated-sources/xjc}
+   *
+   * NOTE: This is only used for the UP-TO-DATE check.
+   */
+  @OutputDirectory
+  File generatedFilesDirectory
+
   /**
    * Xsd's under defined {@code xsdDir}.
    */
