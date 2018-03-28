@@ -11,8 +11,8 @@ buildscript {
     //// use local artifacts
     ////--------------------------------------------------------------------------------
     //dependencies {
-    //    classpath files('../build/libs/gradle-jaxb-plugin.jar')                          // gradle unversionedJar
-    //    //classpath files("/${gradle.gradleHomeDir}/lib/plugins/gradle-jaxb-plugin.jar") // gradle installPlugin
+    //    classpath files('../build/libs/gradle-jaxb-plugin.jar')                          // ./gradlew unversionedJar
+    //    //classpath files("/${gradle.gradleHomeDir}/lib/plugins/gradle-jaxb-plugin.jar") // ./gradlew installPlugin
     //    classpath 'com.google.inject:guice:3.0'
     //    classpath 'com.google.inject.extensions:guice-assistedinject:3.0'
     //}

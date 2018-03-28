@@ -87,8 +87,10 @@ publishing {
     }
 }
 
-task('tagVersion', description: 'Tag the repository with the current version.', group: 'release') << {
-    scmFactory.create().tag(version)
+task('tagVersion', description: 'Tag the repository with the current version.', group: 'release') {
+    doLast {
+        scmFactory.create().tag(version)
+    }
 }
 
 task('release', description: 'Release the project and publish to public repo.', group: 'release', dependsOn: [test, publish, tagVersion, publishPlugins])

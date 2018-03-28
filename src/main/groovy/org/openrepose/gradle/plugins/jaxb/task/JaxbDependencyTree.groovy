@@ -49,7 +49,7 @@ class JaxbDependencyTree extends DefaultTask {
    */
   @TaskAction
   void start() {
-    log.lifecycle("jaxb: starting Namespace Task")
+    log.info("jaxb: starting Namespace Task")
     def xsdFiles = getXsds().files
     def documents = xsdFiles.collect{file -> docFactory.createDocument(file)}
     def namespaces = getNamespaceResolver().resolve(documents)
