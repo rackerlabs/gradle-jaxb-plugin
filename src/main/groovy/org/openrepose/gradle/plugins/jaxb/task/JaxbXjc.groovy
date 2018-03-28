@@ -86,6 +86,10 @@ class JaxbXjc extends DefaultTask {
    */
   @TaskAction
   void start() {
+    // Delete the directory from the last run if the UP-TO-DATE check fails.
+    getGeneratedFilesDirectory().deleteDir()
+    getGeneratedFilesDirectory().mkdirs()
+
     def manager = getManager()
 
     if (!getBindings().isEmpty()) {
