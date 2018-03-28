@@ -148,6 +148,9 @@ class JaxbPlugin implements Plugin<Project> {
       "and find all unique namespaces, create a namespace graph and parse in " +
       "the graph order with jaxb"
     jnt.group = JAXB_TASK_GROUP
+    jnt.conventionMapping.generatedFilesDirectory = {
+      new File((String)project.jaxb.xjc.destinationDir)
+    }
     jnt.conventionMapping.xsds = {
       project.fileTree(
               dir: new File((String)project.jaxb.xsdDir),
