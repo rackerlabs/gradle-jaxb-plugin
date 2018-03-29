@@ -1,5 +1,5 @@
 group = 'org.openrepose'
-def baseVersion = '2.4.2'
+def baseVersion = '2.5.0'
 version = project.hasProperty('release') ? baseVersion : "$baseVersion-SNAPSHOT"
 description = "Gradle plugin to ease development with XSD's using the jaxb ant task"
 
@@ -12,7 +12,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.gradle.publish:plugin-publish-plugin:0.9.9'
+        classpath 'com.gradle.publish:plugin-publish-plugin:0.9.10'
         classpath 'com.netflix.nebula:gradle-git-scm-plugin:3.0.1'
         classpath 'gradle.plugin.org.ysb33r.gradle:gradletest:1.1'
     }
