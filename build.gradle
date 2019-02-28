@@ -12,9 +12,10 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.gradle.publish:plugin-publish-plugin:0.9.10'
+        classpath 'com.gradle.publish:plugin-publish-plugin:0.10.1'
         classpath 'com.netflix.nebula:gradle-git-scm-plugin:3.0.1'
         classpath 'gradle.plugin.org.ysb33r.gradle:gradletest:1.1'
+        classpath 'gradle.plugin.org.openrepose:gradle-codacy-plugin:1.0.0'
     }
 }
 
@@ -23,6 +24,8 @@ apply plugin: 'groovy'
 apply plugin: 'maven-publish'
 apply plugin: 'nebula.gradle-git-scm'
 apply plugin: 'org.ysb33r.gradletest'
+apply plugin: 'jacoco'
+apply plugin: 'org.openrepose.gradle.plugins.codacy'
 
 repositories {
     jcenter()
@@ -137,5 +140,11 @@ gradleTest {
 
     beforeTest {
         println "  ${it.name}"
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
     }
 }
