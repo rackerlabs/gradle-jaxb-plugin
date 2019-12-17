@@ -16,6 +16,7 @@ buildscript {
         classpath 'com.netflix.nebula:gradle-git-scm-plugin:3.0.1'
         classpath 'gradle.plugin.org.ysb33r.gradle:gradletest:1.1'
         classpath 'gradle.plugin.org.openrepose:gradle-codacy-plugin:1.0.0'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.4'
     }
 }
 
@@ -26,6 +27,7 @@ apply plugin: 'nebula.gradle-git-scm'
 apply plugin: 'org.ysb33r.gradletest'
 apply plugin: 'jacoco'
 apply plugin: 'org.openrepose.gradle.plugins.codacy'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 repositories {
     jcenter()
@@ -36,10 +38,11 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.7
 
 dependencies {
-    compile gradleApi()
-    compile localGroovy()
-    compile 'org.codehaus.groovy:groovy-all:2.4.12'
-    compile 'org.slf4j:slf4j-api:1.7.6'
+    shadow gradleApi()
+    shadow localGroovy()
+    shadow 'org.codehaus.groovy:groovy-all:2.4.12'
+    shadow 'org.slf4j:slf4j-api:1.7.6'
+
     compile 'com.google.inject:guice:3.0'
     compile 'com.google.inject.extensions:guice-assistedinject:3.0'
 
@@ -53,6 +56,13 @@ dependencies {
     gradleTest 'org.glassfish.jaxb:jaxb-runtime:2.2.11'
 
 }
+
+task relocateShadowJar(type: com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation) {
+    target = tasks.shadowJar
+    prefix = "org.openrepose.gradle.plugins.jaxb.shadow"
+}
+
+tasks.shadowJar.dependsOn tasks.relocateShadowJar
 
 // NOTE:    The gradle.publish.key and gradle.publish.secret need added to your ~/.gradle/gradle.properties as per the
 //          instructions located at https://plugins.gradle.org/docs/submit
@@ -74,6 +84,12 @@ publishing {
     publications {
         mavenJar(MavenPublication) {
             from components.java
+        }
+        shadow(MavenPublication) {
+            artifactId = 'gradle-jaxb-plugin-with-deps'
+            artifact(shadowJar) {
+                classifier = null
+            }
         }
     }
 
