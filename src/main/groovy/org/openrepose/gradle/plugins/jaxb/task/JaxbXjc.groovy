@@ -6,6 +6,7 @@ import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.openrepose.gradle.plugins.jaxb.JaxbPlugin
@@ -26,6 +27,7 @@ class JaxbXjc extends DefaultTask {
   /**
    * Contains and manages the xsd dependency tree.
    */
+  @Internal
   TreeManager manager
 
   /**
@@ -61,21 +63,25 @@ class JaxbXjc extends DefaultTask {
   /**
    * Executes the ant {@code xjc} task.
    */
+  @Internal
   AntExecutor xjc
 
   /**
    * Converts xsd namespaces to episode file names.
    */
+  @Internal
   NamespaceToEpisodeConverter episodeConverter
 
   /**
    * Resolves the input files for the ant task to parse.
    */
+  @Internal
   XjcResolver xjcResolver
 
   /**
    * Resolves a node's dependencies to episode files to bind in ant task.
    */
+  @Internal
   EpisodeDependencyResolver dependencyResolver
 
   /**
