@@ -1,6 +1,7 @@
-group = 'org.openrepose'
+group = 'com.github.seanrl'
 def baseVersion = '2.5.1'
-version = project.hasProperty('release') ? baseVersion : "$baseVersion-SNAPSHOT"
+//version = project.hasProperty('release') ? baseVersion : "$baseVersion-SNAPSHOT"
+version = '2.5.1'
 description = "Gradle plugin to ease development with XSD's using the jaxb ant task"
 
 buildscript {
@@ -12,7 +13,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.gradle.publish:plugin-publish-plugin:0.10.1'
+        classpath 'com.gradle.publish:plugin-publish-plugin:0.11.0'
         classpath 'com.netflix.nebula:gradle-git-scm-plugin:3.0.1'
         classpath 'gradle.plugin.org.ysb33r.gradle:gradletest:1.1'
         classpath 'gradle.plugin.org.openrepose:gradle-codacy-plugin:1.0.0'
@@ -57,38 +58,25 @@ dependencies {
 // NOTE:    The gradle.publish.key and gradle.publish.secret need added to your ~/.gradle/gradle.properties as per the
 //          instructions located at https://plugins.gradle.org/docs/submit
 pluginBundle {
-    website = 'https://github.com/rackerlabs/gradle-jaxb-plugin'
-    vcsUrl = 'https://github.com/rackerlabs/gradle-jaxb-plugin'
+    website = 'https://github.com/seanrl/gradle-jaxb-plugin'
+    vcsUrl = 'https://github.com/seanrl/gradle-jaxb-plugin'
     description = project.description
     tags = ['jaxb', 'xsd', 'xjc']
 
     plugins {
         gradleJaxbPlugin {
-            id = 'org.openrepose.gradle.plugins.jaxb'
+            id = 'com.github.seanrl.jaxb'
             displayName = 'Gradle JAXB plugin'
         }
     }
-}
 
-publishing {
-    publications {
-        mavenJar(MavenPublication) {
-            from components.java
-        }
-    }
-
-    repositories {
-        maven {
-            name 'releases.maven.research.rackspace.com'
-            url 'https://maven.research.rackspacecloud.com/content/repositories/releases'
-            credentials {
-                // NOTE: These properties should be in your ~/.gradle/gradle.properties
-                username property('maven.repo.username')
-                password property('maven.repo.password')
-            }
-        }
+    mavenCoordinates {
+        groupId = "com.github.seanrl"
+        artifactId = "jaxb-plugin"
+        version = "$project.version"
     }
 }
+
 
 task('tagVersion', description: 'Tag the repository with the current version.', group: 'release') {
     doLast {
