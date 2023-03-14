@@ -62,20 +62,17 @@ dependencies {
 pluginBundle {
     website = 'https://github.com/seanrl/gradle-jaxb-plugin'
     vcsUrl = 'https://github.com/seanrl/gradle-jaxb-plugin'
-    description = project.description
     tags = ['jaxb', 'xsd', 'xjc']
+}
 
+gradlePlugin{
     plugins {
         gradleJaxbPlugin {
             id = 'com.github.seanrl.jaxb'
             displayName = 'Gradle JAXB plugin'
+            description = project.description
+            implementationClass = 'org.openrepose.gradle.plugins.jaxb.JaxbPlugin'
         }
-    }
-
-    mavenCoordinates {
-        groupId = "com.github.seanrl"
-        artifactId = "jaxb-plugin"
-        version = "$project.version"
     }
 }
 
