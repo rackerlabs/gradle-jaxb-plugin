@@ -2,6 +2,7 @@ package org.openrepose.gradle.plugins.jaxb.task
 
 import org.gradle.api.logging.Logging
 import org.gradle.api.logging.Logger
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.InputFiles
@@ -37,21 +38,25 @@ class JaxbDependencyTree extends DefaultTask {
   /**
    * Generates {@code BaseSchemaDocument}'s.
    */
+  @Internal
   DocumentFactory docFactory
 
   /**
    * Resolves xsds files into namespace containers.
    */
+  @Internal
   NamespaceResolver namespaceResolver
 
   /**
    * Resolves and slurps external dependencies.
    */
+  @Internal
   ExternalDependencyResolver externalDependencyResolver
 
   /**
    * Generates the xsd dependency tree.
    */
+  @Internal
   XsdDependencyTreeFactory dependencyTreeFactory
 
   /**

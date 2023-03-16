@@ -18,4 +18,6 @@ interface AntExecutor {
    * @param arguments  variable parameters to configure the {@code AntBuilder}
    */
   public void execute(AntBuilder ant, Object... arguments)
+
+  public void execute(org.gradle.api.internal.project.DefaultAntBuilder ant, Object... arguments)
 }

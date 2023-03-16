@@ -9,8 +9,8 @@ In compliance with the license chosen by the original author, we are publishing 
 
 To prevent possible collisions and/or confusion if the original author decides to accept our PR's or to simply begin anew, we have changed the id and package names.
 
-In compliance with the gradle plugin submission guidelines, the plugin's id was changed from `com.github.jacobono.jaxb` to `org.openrepose.gradle.plugins.jaxb`.
-This affects how you apply the plugin (`apply plugin: 'org.openrepose.gradle.plugins.jaxb'`).
+In compliance with the gradle plugin submission guidelines, the plugin's id was changed from `org.openrepose.gradle.plugins.jaxb` to `com.github.seanrl.jaxb`.
+This affects how you apply the plugin (`apply plugin: 'com.github.seanrl.jaxb'`).
 
 This Gradle plugin defines some conventions for XSD projects and provides some processing to ease some of the maintenance of these projects by:
 
@@ -24,7 +24,7 @@ This Gradle plugin defines some conventions for XSD projects and provides some p
 == Using The Plugin
 
 See this plugin's page in the
-https://plugins.gradle.org/plugin/org.openrepose.gradle.plugins.jaxb[gradle plugins repo].
+https://plugins.gradle.org/plugin/com.github.seanrl.jaxb[gradle plugins repo].
 
 == Setting Up The JAXB Configurations
 
@@ -229,8 +229,8 @@ Create a convention for xsd projects to have a suffix of `-schema`, then it is e
 [source, groovy]
 ----
 subprojects { project ->
-  if(project.name.endsWith("-schema")) { 
-    apply plugin: 'org.openrepose.gradle.plugins.jaxb'
+  if(project.name.endsWith("-schema")) {
+    apply plugin: 'com.github.seanrl.jaxb'
 
     dependencies { 
       jaxb 'org.glassfish.jaxb:jaxb-xjc:2.2.11'
@@ -249,7 +249,7 @@ You can then use it this way:
 ----
 subprojects { project ->
   if(Boolean.valueOf(project.getProperties().getOrDefault('doJAXB', 'false'))) { 
-    apply plugin: 'org.openrepose.gradle.plugins.jaxb'
+    apply plugin: 'com.github.seanrl.jaxb'
 
     dependencies { 
       jaxb 'org.glassfish.jaxb:jaxb-xjc:2.2.11'
