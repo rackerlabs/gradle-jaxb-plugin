@@ -142,7 +142,7 @@ class JaxbXjc extends DefaultTask {
             xjcConfig.asPath,
             project.files(xsdFiles),
             getBindings(),
-//            project.files(episodes),
+            project.files(episodes),
             episodeFile
     )
   }

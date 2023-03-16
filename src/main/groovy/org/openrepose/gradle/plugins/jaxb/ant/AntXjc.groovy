@@ -1,5 +1,6 @@
 package org.openrepose.gradle.plugins.jaxb.ant
 import org.gradle.api.file.FileCollection
+import org.gradle.api.internal.project.DefaultAntBuilder
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
 import org.openrepose.gradle.plugins.jaxb.extension.XjcExtension
@@ -47,6 +48,61 @@ class AntXjc implements AntExecutor {
     ant.taskdef (name : 'xjc',
 		 classname : extension.taskClassname,
 		 classpath : classpath)
+
+    def args = [destdir	        : extension.destinationDir,
+                extension	    : extension.extension,
+                removeOldOutput : extension.removeOldOutput,
+                header	        : extension.header]
+    if (extension.generatePackage) {
+      args << [package : extension.generatePackage]
+    }
+    log.info("xjc ant task is being passed these arguments: '{}'", args)
+    if(extension.accessExternalSchema == null) {
+      System.clearProperty('javax.xml.accessExternalSchema')
+    } else {
+      System.setProperty('javax.xml.accessExternalSchema', extension.accessExternalSchema)
+    }
+    ant.xjc(args) {
+      //TODO maybe should put the produces in there?
+      //produces (dir : destinationDirectory)
+      xsds.addToAntBuilder(ant, 'schema', FileCollection.AntType.FileSet)
+      bindings.addToAntBuilder(ant, 'binding', FileCollection.AntType.FileSet)
+      episodes.addToAntBuilder(ant, 'binding', FileCollection.AntType.FileSet)
+      // ant's arg line is space delimited, won't work with spaces
+      arg(value : "-classpath")
+      arg(value : "$pluginsPath")
+      if(episodeFile) {
+        arg(value: "-episode")
+        arg(value: "$episodeFile")
+      }
+      for (String val : extension.args) {
+        arg(value: val)
+      }
+      if (log.isDebugEnabled()) {
+        arg(value: '-debug')
+      }
+      if (log.isInfoEnabled()) {
+        arg(value: '-verbose')
+      }
+    }
+  }
+
+  @Override
+  void execute(DefaultAntBuilder ant, Object... arguments) {
+    XjcExtension extension = arguments[0] as XjcExtension
+    def classpath = arguments[1]
+    def pluginsPath = arguments[2]
+    def xsds = arguments[3]
+    def bindings = arguments[4]
+    def episodes = arguments[5]
+    def episodeFile = arguments[6]
+
+    log.info("xjc task is being passed these arguments: Plugin Extension '{}', classpath '{}', pluginsPath '{}', xsds '{}', bindings '{}', episodes '{}', episodeFile '{}'",
+            extension, classpath, pluginsPath, xsds, bindings, episodes, episodeFile)
+
+    ant.taskdef (name : 'xjc',
+            classname : extension.taskClassname,
+            classpath : classpath)
 
     def args = [destdir	        : extension.destinationDir,
                 extension	    : extension.extension,
